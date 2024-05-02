@@ -7,8 +7,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
+import com.android.volley.RequestQueue;
+import com.example.fantasyzoo.Adapters.AnimalAdapter;
+import com.example.fantasyzoo.Models.FantasyAnimal;
 import com.example.fantasyzoo.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,10 +32,15 @@ public class AnimalFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
+    private GridView gridView;
+    private ArrayList<FantasyAnimal> animals;
+    private AnimalAdapter adapter;
+    public static RequestQueue rq;
+
     public AnimalFragment() {
         // Required empty public constructor
     }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -61,6 +72,14 @@ public class AnimalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_animal, container, false);
+        View view = inflater.inflate(R.layout.fragment_animal, container, false);
+
+        gridView = view.findViewById(R.id.animal_list);
+        animals = new ArrayList<>();
+        adapter = new AnimalAdapter(getContext(), animals);
+        gridView.setAdapter(adapter);
+        return view;
     }
+
+
 }
